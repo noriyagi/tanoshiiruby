@@ -156,8 +156,63 @@ a = [1,2,3,4,5]
 p a.slice!(1,2)
 p a
 
+#Unique
+a = [1,2,3,4,5,2,3,4]
+a.uniq!
+p a
+
+#Shift
+a = [1,2,3,4,5]
+p a.shift
+p a
+
+#Pop
+a= [1,2,3,4,5]
+p a.pop
+p a
+
+#Hairetsu No Youso wo Okikaeru
+a = [1,2,3,4,5]
+a.collect! {|item| item*2 }
+p a
 
 
+#Sitei Okikae
+p [1,2,3,4,5].fill(0)
+p [1,2,3,4,5].fill(0,2)
+p [1,2,3,4,5].fill(0,2,2)
+p [1,2,3,4,5].fill("a",2..3)
 
 
+#Heitanka
+a = [1,[2,[3]],[4],5]
+a.flatten!
+p a
 
+#Gyakujun
+a = [1,2,3,4,5]
+a.reverse!
+p a
+
+#Sort
+a = [2,4,3,5,1]
+a.sort!
+p a
+
+#11.8
+#Iterator
+a = [1,2,3,4,5]
+b = a.collect{|i| i += 2}
+
+#List
+list = ["a","b","c","d"]
+for i in 0..3
+  print i+1, "î‘ñ⁄ÇÃóvëfÇÕ",list[i],"Ç≈Ç∑ÅB\n"
+end
+#Sum_List
+list = [1,2,3,4,5]
+sum = 0
+for i in 0..4
+  sum += list[i]
+end
+print "çáåv",sum,"\n"
