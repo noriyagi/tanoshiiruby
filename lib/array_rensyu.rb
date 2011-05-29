@@ -112,7 +112,7 @@ p "Hakai a =", a
 
 a =[1, nil, 3, nil, nil]
 b = a.compact
-print "Not Hakai"
+print "Not Hakai\n"
 p "a=", a
 p "b=", b
 
@@ -120,4 +120,44 @@ a = [1]
 a.compact!
 print "nil‚ª‚È‚¢Žž‚Ìreturn"
 p a
+
+#HakaiTeki na Method
+
+a = [1,2,3,4]
+b = a
+p b.pop
+p b.pop
+p b.pop
+
+p a
+p b
+
+#Sitei no Youso(2) Wo Torinozoku
+a = [1,2,3,2,1]
+a.delete(2)  #Hairetukara (2) wo Torinozoku
+p a
+
+#Sitei no Index no Youso wo Torinozoku
+a = [1,2,3,4,5]
+a.delete_at(2)
+p a
+
+#Joukentsuki Delete
+a = [1,2,3,4,5]
+a.delete_if{|i| i > 3}
+p a
+
+#Siteisaretayouso wo Torinozoki Sore wo Kaesu
+a = [1,2,3,4,5]
+p a.slice(1, 2)
+p a
+
+a = [1,2,3,4,5]
+p a.slice!(1,2)
+p a
+
+
+
+
+
 
