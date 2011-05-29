@@ -31,3 +31,17 @@ p color_table.to_a
 #splitメソッドで文字列から配列を作成する。
 column = "2010/01/09 22:33 foo.html proxy.example.jp".split()
 p column
+
+#11.3
+#Hairetu & Index
+
+alpha = ["a","b","c","d","e"]
+p alpha[1]
+p alpha[-1]
+p alpha[-2]
+#Hani
+p alpha[1..3]
+p alpha[1..7]
+#Length
+p alpha[2,2]
+p alpha[2,3]
