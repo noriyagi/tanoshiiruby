@@ -45,3 +45,79 @@ p alpha[1..7]
 #Length
 p alpha[2,2]
 p alpha[2,3]
+
+#Sounyuusuru
+alpha[2,0] = ["X","Y"]
+p alpha
+
+#Array -> Array2
+alpha = %w(a b c d e f)
+p alpha.values_at(1,3,5)
+
+#Hairetu to Syuugou
+ary1 = ["a","b","c"]
+ary2 = ["b","c","d"]
+
+p (ary1 & ary2)
+p (ary1 | ary2)
+p (ary1 - ary2)
+
+#[+] [|]
+num  = [1,2,3]
+even = [2,4,6]
+
+p (num +even)
+p (num | even)
+
+#Que
+p alpha.push("g")  #Last ni Push
+p alpha.shift      #Sentou wo Toridasu
+p alpha
+
+#Stac
+alpha = %w(a b c d e)
+p alpha.push("f")
+p alpha.pop
+p alpha
+
+#EX
+a = [1,2,3,4,5]
+p a.first
+p a.last
+p a
+
+#11.7
+#Tuika
+a.unshift(0)
+#<< Push
+a << 6
+p a
+#a.concat(b)
+a = [1,2,3,4,5]
+a.concat([8,9])
+p a
+#Tikan
+a = [1,2,3,4,5]
+a[1,3] = 0
+p a
+#Tikan2 1kara3keta wo 0 nisuru
+a = [1,2,3,4,5]
+a[1,3] = [0,0,0]
+p a
+
+#Torinozoku
+a =[1, nil, 3, nil, nil]
+a.compact!
+p "Hakai a =", a
+
+a =[1, nil, 3, nil, nil]
+b = a.compact
+print "Not Hakai"
+p "a=", a
+p "b=", b
+
+a = [1]
+a.compact!
+print "nil‚ª‚È‚¢Žž‚Ìreturn"
+p a
+
