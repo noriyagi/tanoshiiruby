@@ -209,10 +209,83 @@ list = ["a","b","c","d"]
 for i in 0..3
   print i+1, "番目の要素は",list[i],"です。\n"
 end
+
 #Sum_List
 list = [1,2,3,4,5]
 sum = 0
-for i in 0..4
-  sum += list[i]
+i = 0
+for j in 0..4
+  sum += list[j]
 end
 print "合計",sum,"\n"
+
+#Sum_List->each
+list = [1,2,3,4,5]
+sum = 0
+i = 0
+list.each do |elem|
+  sum += elem
+end
+print "合計",sum,"\n"
+
+#each_with_index
+list = ["a","b","c","d"]
+list.each_with_index do |elem, i|
+  print i+1, "番目の要素は",elem,"です！\n"
+end
+
+#Hakai tekina Kurikaesi
+a = ["a","b","c","d"]
+while item = a.pop
+  p item
+end
+p a
+
+#11.10
+
+#Hairetu
+#1,2,3
+#4,5,6
+#7,8,9
+
+a = [[1,2,3],[4,5,6],[7,8,9]]
+p a[1][2]
+
+#Sippai
+a = Array.new(3, [0,0,0])
+p a
+
+a[0][1] = 2
+p a
+
+#Kairyou
+a = Array.new(3) do
+  [0,0,0]
+end
+p a
+a[0][1] = 2
+p a
+
+#sum_with_each
+ary1 = [1,2,3,4,5]
+ary2 = [10,20,30,40,50]
+ary3 = [100,200,300,400,500]
+
+i = 0
+result = []
+while i < ary1.length
+  result << ary1[i] + ary2[i] + ary3[i]
+  i += 1
+end
+p result
+
+#sum_with_zip
+ary1 = [1,2,3,4,5]
+ary2 = [10,20,30,40,50]
+ary3 = [100,200,300,400,500]
+
+result = []
+ary1.zip(ary2, ary3) do |a, b, c|
+  result << a + b + c
+end
+p result
