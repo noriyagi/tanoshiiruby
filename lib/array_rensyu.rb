@@ -289,3 +289,22 @@ ary1.zip(ary2, ary3) do |a, b, c|
   result << a + b + c
 end
 p result
+
+#‘æ12Í@String class
+
+#12.1
+#String
+str1 = "Mojiretsu"
+str2 = 'Mojiretsu'
+
+p str1
+p str2
+
+moji = "•¶Žš—ñ"
+str3 = "‚ ‚ê‚à#{moji}"
+
+p str3
+
+str4 = '‚ ‚ê‚à#{moji}'
+
+p str4
