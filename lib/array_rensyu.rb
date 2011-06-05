@@ -520,3 +520,113 @@ result << cd.iconv("う")
 }
 
 #第13章　Hash Class
+
+#13.1 ハッシュの復習
+person = Hash.new
+person[0] = "田中"
+person[1] = "佐藤"
+p person[1]
+
+#13.1 ハッシュの作り方
+h1 = {"a" => "b", "c" => "d"}
+p h1["a"]
+
+#13.2 Hash.new を使う。
+h1 = Hash.new
+h2 = Hash.new("")
+p h1["not_key"]
+p h2["not_key"]
+
+#13.3 取り出す、設定する。
+h = Hash.new
+h["R"] = "Ruby"
+p h["R"]
+
+h.store("J", "Java")
+p h.fetch("J")
+#p h.fetch("N")
+
+p h.fetch("N", "(undef)")
+p h.fetch("N", String.new)
+
+p h.keys
+p h.values
+p h.to_a
+
+#13.3.2 ハッシュのデフォルト値
+
+#生成時に指定
+h = Hash.new(1)
+h["a"] = 10
+
+p h["a"]
+p h["x"]
+p h["y"]
+
+#デフォルト値を生成するブロックを指定する
+h = Hash.new{|hash, key|
+  hash[key] = key.upcase
+}
+
+h["a"] = "b"
+
+p h["a"]
+p h["x"]
+p h["y"]
+
+#fetch を利用する。
+h = Hash.new{|hash, key|
+  hash[key] = key.upcase
+}
+
+p h.fetch("x", "(undef)")
+
+#13.4 あるオブジェクトをキーや値として持っているか。
+#Keyとして
+h = {"a" => "b", "c" => "d"}
+p h.key?("a")
+p h.has_key?("x")
+#Valueとして
+p h.value?("b")
+p h.has_value?("z")
+
+#13.5 ハッシュの大きさを調べる。
+p h.length
+p h.size
+
+p h.empty?
+
+h2 = Hash.new
+p h2.empty?
+
+#13.6 キー値を削除する。
+h = {"R" => "Ruby"}
+p h["R"]
+h.delete("R")
+p h["R"]
+
+h = {"R" => "Ruby"}
+p h.delete("P"){|key| "no #{key}."} #対象が存在しなかった場合、ブロックを実行
+
+#条件付き
+h = {"R" => "Ruby", "P" => "Perl"}
+p h.delete_if{|key, value| key == "P"} #条件に当てはまらないものを出力
+
+#条件付き２
+h = {"R" => "Ruby", "P" => "Perl"}
+p h.delete_if{|key, value| key == "L"}
+p h.reject!{|key, value| key == "L"}
+
+#13.7 ハッシュを初期化する
+#使ったハッシュを空に。
+h = {"R" => "Ruby", "P" => "Perl"}
+h.clear
+p h.size
+
+#ハッシュのハッシュ
+table = {"A" =>{"a" => "x", "b" => "y"}, "B" => {"a" => "v", "b" => "w"}}
+
+p table["A"]["a"]
+p table["B"]["a"]
+
+#13.8 word_count
