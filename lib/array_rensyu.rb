@@ -380,3 +380,17 @@ p column
 
 column = str.unpack("a4a4a*")
 p column
+
+#12.4 •¶Žš—ñ‚ð‚Â‚È‚°‚é
+hello = "Hello, "
+world = "World!"
+
+str = hello + world  #‚Â‚È‚°‚é
+p str
+
+hello << world #Œã‚ë‚É’Ç‰Á‚·‚éŠ´‚¶
+p hello
+
+hello.concat(world) #Œã‚ë‚É’Ç‰Á‚·‚éŠ´‚¶‚Q
+p hello
+
