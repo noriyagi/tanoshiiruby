@@ -356,3 +356,19 @@ printf("Hello,%s!\n", n)
 printf("Hello,%8s!!\n", n)
 printf("Hello,%-8s!!!\n", n)
 
+#12.2 文字列の長さ
+str = "just another ruby hacker,"
+p srt.length
+p str.size
+
+#日本語は苦手
+str = '写経やるよー！'
+p str.length
+# .length はバイト数をカウントしている。
+
+p str.split(//s).lengthb #S-JIS
+p str.split(//u).length  #UTF-8
+
+#空かチェックする。
+p "".empty?
+p "foo".empty?
