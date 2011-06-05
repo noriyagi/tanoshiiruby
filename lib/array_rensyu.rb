@@ -394,3 +394,129 @@ p hello
 hello.concat(world) #後ろに追加する感じ２
 p hello
 
+#12.5 文字列のインデックス
+str = "abcdef"
+p str[0]
+p str[0].chr
+
+p str[-1]
+p str[-1].chr
+
+p str[1,2]
+p str[1,3]
+
+str = "あいうえお"
+p str.split(//s)[2]
+p str[2,4]
+p str[2,3]
+
+#12.6 文字列を比較する。
+
+p "aaa" == "bbb"
+p "aaa" != "bbb"
+
+p ("aaaaa" < "b")
+p ("0" < "a")
+
+#12.7 改行文字の扱い
+str = "abcde"
+
+#chop -> 必ず１文字削る。
+newstr = str.chop
+p newstr
+#chomp -> 改行がある場合のみ削る。
+newstr = str.chomp
+p newstr
+
+str2 = "abcd\n"
+newstr = str2.chop
+p newstr
+
+newstr = str2.chomp
+p newstr
+
+#12.8 検索と置換
+str = "sumomomomomomomomonouchi"
+p str.index("momo")
+p str.rindex("momo")
+p str.index("aaaa")
+
+p str.include?("momo")
+p str.include?("aaaa")
+
+#12.9 文字列と配列で共通するメソッド
+
+str = "abcde"
+str[2,1] = "C"
+p str
+
+str = "Hello, Ruby!"
+p str.slice!(-1)
+p str.slice!(5..6)
+p str.slice!(0, 5)
+p str
+
+#12.9.2 Enumerableモジュールのメソッド
+#each_lineメソッドで取り出した行をcollectメソッドで処理する。
+
+#str = "a\nb\nc\n"
+#p str
+#tmp = str.each_line.collect do |line|
+#  line.chomp
+#end
+#p tmp
+
+#12.9
+s = "abc"
+s.concat("def")
+p s
+
+s = "abcabc"
+p s.delete("b")
+
+s = "abcdefg"
+p s.reverse
+
+#12.10 その他
+#先頭、末尾の空白を取り除く
+p "  aaa  bbb  ccc  ".strip
+
+#大文字－小文字置き換え
+str = "Object-Oriented Language"
+p str.upcase
+
+p str.downcase
+
+p str.swapcase
+
+p str.capitalize
+
+str = "abcdef"
+
+p str.tr("b","B")
+p str.tr("bc","BC")
+p str.tr("b-e","B-E")
+
+#12.11.2 iconvライブラリ
+require "iconv"
+result = ""
+cd = Iconv.open("UTF-8", "Shift-JIS")
+result << cd.iconv("あ")
+result << cd.iconv("い")
+result << cd.iconv("う")
+cd.close
+p result
+p "あ"
+p "い"
+p "う"
+
+require "iconv"
+result = ""
+
+Iconv.open("UTF-8", "Shift-JIS"){|cd|
+result << cd.iconv("あ")
+result << cd.iconv("い")
+result << cd.iconv("う")
+}
+
+#第13章　Hash Class
