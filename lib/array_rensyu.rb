@@ -629,4 +629,3 @@ table = {"A" =>{"a" => "x", "b" => "y"}, "B" => {"a" => "v", "b" => "w"}}
 p table["A"]["a"]
 p table["B"]["a"]
 
-#13.8 word_count
