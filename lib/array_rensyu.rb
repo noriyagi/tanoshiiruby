@@ -366,9 +366,17 @@ str = '写経やるよー！'
 p str.length
 # .length はバイト数をカウントしている。
 
-p str.split(//s).lengthb #S-JIS
+p str.split(//s).length  #S-JIS
 p str.split(//u).length  #UTF-8
 
 #空かチェックする。
 p "".empty?
 p "foo".empty?
+
+#12.3 文字を分割する。
+str = "aaa:bbb:ccc:ddd:eee:fff"
+column = str.split(/:/)
+p column
+
+column = str.unpack("a4a4a*")
+p column
