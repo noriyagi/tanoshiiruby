@@ -308,3 +308,51 @@ p str3
 str4 = 'あれも#{moji}'
 
 p str4
+
+#12.1.1 %Q,%qを使う
+p desc = %Q{Rubyの文字列には「''」も「””」も使われます。}
+p srt  = %q|Ruby said, 'Hello world!'|
+# %Qは"",%qは''と同じ意味。
+
+#12.1.2 ヒアドキュメント
+#
+# << "終了の記号"
+#   置き換える文字列
+# 終了の記号
+#
+#  ＊終了の記号は行頭に書かなければならない。
+#　　->インデントが崩れがち。
+#     -> "<<-" を使うと、行頭の空白とタブを無視してくれる。
+i = 0
+j = 0
+10.times do |i|
+  10.times do |j|
+    print(<<-"EOB")
+     i: #{i}
+     j: #{j}
+     i*j = #{i*j}
+    EOB
+   end
+end
+
+str = <<-EOB
+Hello!
+Hello!
+Hello!
+EOB
+
+p str
+
+#12.1.3 printf,sprintf
+
+n = 123
+printf("%d\n", n)
+printf("%4d\n", n)
+printf("%04d\n", n)
+printf("%+d\n", n)
+
+n = "Ruby"
+printf("Hello,%s!\n", n)
+printf("Hello,%8s!!\n", n)
+printf("Hello,%-8s!!!\n", n)
+
