@@ -629,3 +629,105 @@ table = {"A" =>{"a" => "x", "b" => "y"}, "B" => {"a" => "v", "b" => "w"}}
 p table["A"]["a"]
 p table["B"]["a"]
 
+#第14章　Regexp Class
+#14.1 正規表現について
+
+re = Regexp.new("Ruby")
+
+#14.2 正規表現のパターンとマッチング
+#
+# if 正規表現 =~ 文字列
+#   マッチしたときの処理
+# else
+#   マッチしなかった時の処理
+# end
+
+#14.2.1 通常の文字によるマッチング
+#14.3 quoteメソッドを使った正規表現
+re1 = Regexp.new("abc*def")
+re2 = Regexp.new(Regexp.quote("abc*def"))
+
+p (re1 =~ "abc*def")
+p (re2 =~ "abc*def")
+
+str = "ABC\nDEF\nGHI"
+p /DEF.GHI/ =~ str
+p /DEF.GHI/m =~ str
+
+#14.5 キャプチャ
+/(.)(.)(.)/ =~ "abc"
+first = $1
+second = $2
+third = $3
+p first
+p second
+p third
+
+/(.)(\d\d)+(.)/ =~ "123456"
+p $1
+p $2
+p $3
+
+/(.)(?:\d\d)+(.)/ =~ "123456"
+p $1
+p $2
+
+/C./ =~ "ABCDEF"
+p $`
+p $&
+p $'
+
+#14.6 正規表現を使うメソッド
+
+str = "abc   def   g   hi"
+p str.sub(/\s+/, " ")
+p str.gsub(/\s+/, " ")
+
+#sub,gsub は置換のメソッド。
+#マッチした部分を置換する。
+#ブロックを渡すと、マッチした部分を処理して置換する。
+str = "abracatabra"
+nstr = str.sub(/.a/) do |matched|
+  "<"+matched.upcase+">"
+end
+
+p nstr
+
+str = "abracatabra"
+nstr = str.gsub(/.a/) do |matched|
+  "<"+matched.upcase+">"
+end
+
+p nstr
+
+#!4.6.2 scanメソッド
+str = "abracatabura"
+str.scan(/.a/) do |matched|
+  p matched
+end
+
+#パターンに()が使われていると、そこを配列に置き換えて返してくる。
+str.scan(/(.)(a)/) do |matched|
+  p matched
+end
+#更にブロックを（）の数だけ並べると、要素を取り出せる。
+str.scan(/(.)(a)/) do |a, b|
+  p a+"-"+b
+end
+#ブロックでない場合は、マッチした文字列の配列を返す。
+p str.scan(/.a/)
+
+#14.7 正規表現の例
+#URLを含む行を抽出する。
+#/http:\/\//
+#/http:\/\/([^\/]*)\// →[]の中の先頭で"^"を使うと、そこで指定されたもの以外をさす。
+#ここでは、"/"以外の＊とマッチング！
+
+str = "http://www.ruby-lang.org/ja/"
+%r|http://([^/]*)/| =~ str
+print "server address: ", $1, "\n"
+
+str = "http://www.ruby-lang.org/ja/"
+%r|http://([^/]*)/| =~ str
+print "server address: ", $1, "\n"
+
