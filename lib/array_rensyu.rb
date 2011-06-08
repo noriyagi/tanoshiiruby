@@ -731,3 +731,34 @@ str = "http://www.ruby-lang.org/ja/"
 %r|http://([^/]*)/| =~ str
 print "server address: ", $1, "\n"
 
+#第15章　IO Class
+
+#15.1.1 標準入出力
+
+$stdout.print "Output to $stdout.\n"
+$stderr.print "Output to $stderr.\n"
+
+#標準入力は端末か？
+
+if $stdin.tty?
+  print "Stdin is a TTY.\n"
+else
+  print "Stdin in not a TTY.\n"
+end
+
+#15.1.3 open-uri　ライブラリ
+require "open-uri"
+
+#HTTP経由でデータを取り込む(日本語優先option)
+options = {"Accept-Language" => "ja, en;q=0.5",}
+
+open("http://www.ruby-lang.org", options) do |io|
+  puts io.read
+end
+
+#FTP経由でデータを取り込む
+open("ftp://www.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7.tar.gz") do |io|
+  open("ruby-1.8.7.tar.gz", "w") do |f|
+    f.write(io.read)
+end
+end
