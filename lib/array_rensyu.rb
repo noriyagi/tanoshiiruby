@@ -749,16 +749,32 @@ end
 #15.1.3 open-uri　ライブラリ
 require "open-uri"
 
-#HTTP経由でデータを取り込む(日本語優先option)
-options = {"Accept-Language" => "ja, en;q=0.5",}
+##HTTP経由でデータを取り込む(日本語優先option)
+#options = {"Accept-Language" => "ja, en;q=0.5",}
+#
+#open("http://www.ruby-lang.org", options) do |io|
+#  puts io.read
+#end
+#
+##FTP経由でデータを取り込む
+#open("ftp://www.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7.tar.gz") do |io|
+#  open("ruby-1.8.7.tar.gz", "w") do |f|
+#    f.write(io.read)
+#end
+#end
 
-open("http://www.ruby-lang.org", options) do |io|
-  puts io.read
-end
+#15.1.4 stringio ライブラリ
+require "stringio"
 
-#FTP経由でデータを取り込む
-open("ftp://www.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7.tar.gz") do |io|
-  open("ruby-1.8.7.tar.gz", "w") do |f|
-    f.write(io.read)
-end
-end
+#ためておく事ができる
+io = StringIO.new
+io.puts("A")
+io.puts("B")
+io.puts("C")
+io.rewind
+p io.read
+io.rewind
+#取り出し
+p io.gets
+p io.gets
+p io.gets
