@@ -778,3 +778,54 @@ io.rewind
 p io.gets
 p io.gets
 p io.gets
+
+#15.2
+#15.2.1 入出力
+#while line = io.gets
+#  line.chomp!
+#  ****
+#  ****
+#  ****
+#end
+#
+#p io.eof?
+#
+########################
+#io.each do |line|
+#  line.chomp!
+#  ****
+#end
+#
+#  gets => get string
+#  puts => put string
+#
+########################
+#while line = $stdin.gets
+#  printf("%3d %s", $stdin.lineno, line)
+#end
+########################
+#while ch = io.getc
+#  ****
+#  ****
+#  ****
+#end
+#
+#
+#15.2.2 出力
+#puts
+$stdout.puts "foo", "bar","baz"
+#putc
+$stdout.putc(82)
+$stdout.putc(?R)
+$stdout.putc("\n")
+
+#15.3 ファイルポインタ
+File.open("wc.rb") do |io|
+  p io.read(5)
+  p io.pos
+  io.pos = 0
+  p io.gets
+end
+
+
+
