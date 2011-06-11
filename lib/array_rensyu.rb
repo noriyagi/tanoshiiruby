@@ -825,7 +825,35 @@ File.open("wc.rb") do |io|
   p io.pos
   io.pos = 0
   p io.gets
+  io.rewind
+  p io.gets
 end
 
+#第１６章 FileクラスとDirクラス
+#File.rename("aaa.txt", "after.txt")
 
+#Dirが見つからないのでエラー
+#File.rename("after.txt", "backup/data.txt")
 
+#16.1.2 ファイルをコピーする
+def copy(from, to)
+  open(from) do |input|
+    open(to, "w") do |output|
+      output.write(input.read)
+    end
+  end
+end
+
+copy("after.txt", "after2.txt")
+
+require "fileutils"
+FileUtils.cp("after.txt", "afterafter.txt")
+#FileUtils.mv("after.txt", "backup/after2.txt")
+
+File.delete("after2.txt")
+#16.2 ディレクトリの操作
+p Dir.pwd
+Dir.chdir("./../")
+p Dir.pwd
+Dir.chdir("./lib")
+p Dir.pwd
