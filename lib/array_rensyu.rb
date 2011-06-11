@@ -857,3 +857,151 @@ Dir.chdir("./../")
 p Dir.pwd
 Dir.chdir("./lib")
 p Dir.pwd
+
+p Dir.pwd
+io = open("after.txt")
+io.close
+
+Dir.chdir("./../")
+p Dir.pwd
+io = open("./lib/after.txt")
+io.close
+
+#16.2.1 ディレクトリの内容を読む
+dir = Dir.open("./")
+while name = dir.read
+  p name
+end
+dir.close
+
+dir = Dir.open("./lib")
+dir.each do |name|
+  p name
+end
+dir.close
+
+print "using block\n"
+
+Dir.open("./lib") do |dir|
+  dir.each do |name|
+    p name
+  end
+end
+
+#traverse
+p "list16.1 -> Using ARGV[0]"
+
+def traverse(path)
+  if File.directory?(path)
+    dir = Dir.open(path)
+    while name = dir.read
+      next if name == "."
+      next if name == ".."
+      traverse(path + "/" +name)
+    end
+    dir.close
+  else
+    process_file(path)
+  end
+end
+
+def process_file(path)
+  puts path
+end
+
+traverse(ARGV[0])
+
+p "list16.2 -> Using ARGV[0]"
+#traverse_by_glob
+def traverse_by_grob(path)
+  Dir.glob(["#{path}/**/*", "#{path}/**/.*"]).each do |name|
+    unless File.directory?(name)
+      process_file(name)
+    end
+  end
+end
+
+traverse_by_grob(ARGV[0])
+
+#16.2.2 ディレクトリの作成と削除
+Dir.mkdir("temp")
+p "temp make!"
+Dir.rmdir("temp")
+p "temp remove!"
+
+#16.3 ファイルとディレクトリの属性
+require 'etc'
+
+st = File.stat("./lib/after.txt")
+pw = Etc.getpwuid(st.uid)
+p pw.name
+gr = Etc.getgrgid(st.gid)
+p gr.name
+
+filename = "after.txt"
+open(filename, "w").close
+
+#File.utime -> 最終参照、更新時刻を更新する。
+st = File.stat(filename)
+p st.ctime
+p st.mtime
+p st.atime
+
+p "-100s"
+
+File.utime(Time.now-100, Time.now-100, filename)
+st = File.stat(filename)
+
+p st.ctime
+p st.mtime
+p st.atime
+
+#16.4 ファイル名の操作
+#path名の末尾を取得
+p File.basename("/usr/local/bin/ruby")
+p File.basename("src/ruby/file.c/", ".c")
+p File.basename("file.c", ".c")
+#一番後ろの"/"までを取得
+p File.dirname("/usr/local/bin/ruby")
+p File.dirname("src/ruby/file.c/")
+#拡張子を取り出す
+p File.extname("helloruby.rb")
+#split
+p File.split("usr/local/bin/ruby")
+p File.split("ruby")
+p File.split("/")
+
+dir, base = File.split("usr/local/bin/ruby")
+p dir
+p base
+
+#連結
+p File.join("/usr/local/bin", "ruby")
+p File.join(".", "ruby")
+
+#絶対パスに変換
+p Dir.pwd
+p File.expand_path("bin")
+p File.expand_path("../bin")
+
+#16.5 ファイル操作関連のライブラリ
+#16.5.1 find ライブラリ
+require 'find'
+
+IGNORES = [/^\./, /^CVS$/, /^RCS$/]
+
+def listdir(top)
+  Find.find(top) do |path|
+    if FileTest.directory?(path)
+      dir, base = File.split(path)
+      IGNORES.each do |re|
+        if re =~ base
+          Find.prune
+        end
+      end
+    puts path
+    end
+  end
+end
+#出力が多いので。
+#listdir("/")
