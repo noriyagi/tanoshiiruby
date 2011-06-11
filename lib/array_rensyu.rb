@@ -1005,3 +1005,136 @@ def listdir(top)
 end
 #出力が多いので。
 #listdir("/")
+
+#第１７章 TimeクラスとDateクラス
+#17.2 Timeオブジェクト
+p Time.new
+p Time.now
+
+t= Time.now
+p t
+p t.year
+p t.month
+p t.day
+
+t = Time.mktime(2009, 10, 11, 22, 12, 56)
+p t
+
+#17.3 時刻を計算する。
+t1 = Time.now
+sleep(5)
+t2 = Time.now
+p t1 < t2
+p t2 - t1
+#
+t = Time.now
+p t
+t2 = t + 60 * 60 * 24
+p t2
+
+p t.to_s
+p t.strftime("%s %b %d %H:%M:%S %z %Y")
+
+require 'time'
+
+t = Time.now
+p t.rfc2822
+p t.iso8601
+
+#17.5 ローカルタイム
+t = Time.now
+p t
+t.utc
+p t
+t.localtime
+p t
+
+p Time.parse("Sat Oct 17 11:54:15 UTC 2009")
+p Time.parse("2009/10/17")
+p Time.parse("2009/10/17 20:54:19")
+p Time.parse("H21.10.17")
+p Time.parse("S48.9.28")
+
+#17.7 DateTimeクラスを使う
+require 'date'
+
+#現在時刻を取得する。
+t = DateTime.now
+p t.year
+p t.month
+p t.day
+p t.hour
+p t.min
+p t.sec
+p t.wday
+p t.mday
+p t.yday
+p t.zone
+
+#フォーマットする
+p t.strftime("%Y/%m/%d %H:%M:%S")
+p t.strftime("%a %b %d %H:%M:%S: %Z %Y")
+
+p t.to_s
+
+#解析してDateTimeオブジェクトを得る。
+puts DateTime.parse("The Oct 13 22:59:36 JST 2009")
+puts DateTime.parse("Tue, 13 Oct 2009 20:54:15 +0900")
+
+#17.8 DateTimeクラスとTimeクラスの違い
+require 'date'
+#差分は１日の何倍かを示す。
+t1 = DateTime.now
+sleep(5)
+t2 = DateTime.now
+p t2 - t1
+#加算は日数単位
+puts t
+puts t + 10
+#時差
+p t.offset
+
+t1 = DateTime.now
+t2 = t1.new_offset(0)
+puts t1
+puts t2
+
+#17.9 Dateクラスを使って日付を求める
+d = Date.today
+puts d
+p    d
+
+p d.year
+p d.month
+p d.day
+p d.wday
+p d.mday
+p d.yday
+
+#月は固定で、日付だけさかのぼる。
+d = Date.new(2009, 9, 25)
+puts d
+
+d = Date.new(2009, 4, -1)
+puts d
+
+d = Date.today
+puts d
+puts d + 1
+puts d + 100
+puts d - 1
+#">>""<<"で月単位に移動
+puts d >> 1
+puts d >> 100
+puts d << 1
+puts d << 100
+
+#日付のフォーマット
+p t.strftime("%Y/%m/%d %H:%M:%S")
+p t.strftime("%a %b %d %H:%M:%S %Z %Y")
+p t.to_s
+
+#文字列の解析
+puts Date.parse("Tue Oct 14 11:50:12 JST 2009")
+puts Date.parse("H21.10.14")
+puts Date.parse("S48.9.28")
