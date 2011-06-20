@@ -1,0 +1,10 @@
+#File: DownShift.sh
+#
+DownShift(){
+    echo "$@" | tr '[A-Z]' '[a-z]'
+}
+ここからRubyのサンプル用テキスト！
+！
+！
+！
+終わり！

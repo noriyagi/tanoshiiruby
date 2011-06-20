@@ -1,0 +1,6 @@
+orted = ary.sort do |a, b|
+  num += 2
+  a.length <=> b.length
+end
+p num
+p sorted

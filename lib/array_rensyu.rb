@@ -889,7 +889,7 @@ Dir.open("./lib") do |dir|
 end
 
 #traverse
-p "list16.1 -> Using ARGV[0]"
+p "list16.1 -> Using ARGV[0] =./"
 
 def traverse(path)
   if File.directory?(path)
@@ -1139,4 +1139,97 @@ puts Date.parse("Tue Oct 14 11:50:12 JST 2009")
 puts Date.parse("H21.10.14")
 puts Date.parse("S48.9.28")
 
-#
+#第20章 ブロック
+puts "times do"
+5.times do
+  print "<br>\n"
+end
+
+puts "ここからはべた書き↓"
+print "<br>\n"
+print "<br>\n"
+print "<br>\n"
+print "<br>\n"
+print "<br>\n"
+
+puts "each do"
+sum = 0
+(1..5).each do |i|
+    sum += i
+end
+print "Total: ", sum, "\n"
+
+puts "配列.each do"
+fruits = ['リンゴ', 'バナナ', 'パイナップル']
+fruits.each do |elem|
+  print elem, "\n"
+end
+
+#20.3 さまざまなイテレータ
+alphabet = ["a", "b", "c", "d", "e"]
+alphabet.each do |i|
+  print i, "\n"
+end
+
+puts "ハッシュのイテレータ"
+sum =0
+outcome = {"参加費"=>1000, "ストラップ代"=>1000, "懇親会会費"=>4000}
+outcome.each do |item, price|
+  puts [item, price]
+  sum += price
+end
+print "合計：", sum, "\n"
+
+puts "ハッシュのイテレータ（ブロック変数を一つに)"
+sum =0
+outcome = {"参加費"=>1000, "ストラップ代"=>1000, "懇親会会費"=>4000}
+outcome.each do |pair|
+  puts pair
+  sum += pair[1]
+end
+print "合計：", sum, "\n"
+
+#puts "ファイルのイテレータ"
+#fi = File.open("sample.txt")
+#fi.each_line do |line|
+#  print line
+#end
+#fi.close
+
+#20.5 sortとか
+
+puts "sortメソッド"
+puts "a<=>b"
+array = %w(a f e t h z)
+sorted = array.sort do |a, b|
+    a <=> b
+end
+print sorted, "\n"
+
+puts "b<=>a"
+sorted = array.sort do |a, b|
+    b <=> a
+end
+print sorted, "\n"
+
+puts "a.length <=> b.length"
+ary =%w(1 20 3000 400 500000 6000000 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
+num =0
+sorted = ary.sort do |a, b|
+  num += 2
+  a.length <=> b.length
+end
+p num
+p sorted
+
+puts "sort_by"
+num =0
+sorted = ary.sort_by do |item|
+  num += 1
+  item.length
+end
+p num
+p sorted
+
+
+
